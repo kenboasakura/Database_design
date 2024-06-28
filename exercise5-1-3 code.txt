@@ -1,0 +1,25 @@
+SELECT
+	branch_office_id AS 支社コード,
+	branch_id AS 支社コード,
+	COUNT(*) AS 商品数
+FROM
+	branch_products
+GROUP BY
+	branch_office_id,
+	branch_id
+HAVING
+	COUNT(*) = (
+		SELECT
+			MAX(product_count)
+		FROM
+			(
+				SELECT
+					COUNT(*) AS product_count
+				FROM
+					branch_products
+				GROUP BY
+					branch_office_id,
+					branch_id
+			)AS intermediate_table
+	)
+;

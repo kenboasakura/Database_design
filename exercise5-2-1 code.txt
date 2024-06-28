@@ -1,0 +1,37 @@
+ALTER TABLE
+	product_categories
+ADD
+	(
+	product_count INT NULL
+	)
+;
+
+UPDATE
+	product_categories
+SET 
+	product_count =
+		CASE
+			/*商品コードC1の商品数*/
+			WHEN product_category_id = 'C1' THEN 4
+			/*商品コードC2の商品数*/
+			WHEN product_category_id = 'C2' THEN 2
+			/*商品コードC3の商品数*/
+			WHEN product_category_id = 'C3' THEN 1
+			/*商品コードC4の商品数*/
+			WHEN product_category_id = 'C4' THEN 1
+			/*当てはまらなかった場合の商品数*/
+			ELSE 0
+		END
+;
+
+
+SELECT
+	product_category_id AS 商品コード,
+	category_name AS 分類名,
+	product_count AS 商品数
+FROM
+	product_categories
+;
+
+この変更によって、商品分類ごとの商品数を簡単に調べることができる。
+また改修前のテーブルと違い、無駄な集約と結合を行う必要がなくなったため、処理速度の向上が見込めると考えられる。

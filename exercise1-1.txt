@@ -1,0 +1,11 @@
+演習1-1
+
+1.使用しているDBMSのバージョン、およびDBMSの最新バージョン
+最新バージョン→-MariaDB 11.5.1
+現在使用しているバージョン→MariaDB 10.4.28
+
+2.現在使用しているDBMSのエディションを確認せよ
+MariaDB Enterprise Server
+
+3.現在使用しているDBMSのマニュアルの所在を確認せよ
+MariaDBマニュアルホームページ→https://mariadb.com/kb/ja/mariadb/

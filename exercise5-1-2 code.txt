@@ -1,0 +1,26 @@
+SELECT
+	bo.branch_offie_name AS 支社名,
+	b.branch_name AS 支店名,
+	p.product_name AS 商品数
+FROM
+	(
+		(
+			branch_offies AS bo
+		INNER JOIN
+			branches AS b
+		ON
+			b.branch_offie_id = bo.branch_offie_id
+		)
+	INNER JOIN
+		branch_products AS bp
+	ON
+		bp.branch_offie_id = b.branch_offie_id
+	AND
+		bp.branch_id = b.branch_id
+	)
+INNER JOIN
+	products AS p
+ON
+	p.product_id = bp.product_id
+;
+

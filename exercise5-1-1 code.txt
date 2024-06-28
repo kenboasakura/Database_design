@@ -1,0 +1,12 @@
+SELECT
+	p.product_name AS 分類名,
+	COUNT(p.product_category_id) AS 商品数
+FROM
+	products AS p
+INNER JOIN
+	product_categories AS pc
+ON
+	pc.product_category_id = p.product_category_id
+GROUP BY
+	pc.product_category_id
+;

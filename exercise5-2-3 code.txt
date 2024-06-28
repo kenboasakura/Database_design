@@ -1,0 +1,43 @@
+ALTER TABLE
+	branches
+ADD
+	(
+	product_value INT NULL
+	)
+;
+
+UPDATE
+	branches
+SET
+	product_value =
+		CASE
+			/*渋谷支店の商品数*/
+			WHEN branch_name = '渋谷' THEN 3
+			/*八重洲支店の商品数*/
+			WHEN branch_name = '八重洲' THEN 5
+			/*堺支店の商品数*/
+			WHEN branch_name = '堺' THEN 2
+			/*豊中支店の商品数*/
+			WHEN branch_name = '豊中' THEN 2
+			ELSE NULL
+		END
+;
+
+SELECT
+	branch_office_id AS 支社コード,
+	branch_id AS 支店コード,
+	product_value AS 商品数
+FROM
+	branches
+WHERE
+	product_value =
+	(
+		SELECT
+			MAX(product_value)
+		FROM
+			branches
+	)
+;
+
+この問題と同じ命令を出そうとした際にHAVING句の中の複雑なサブクエリを記載する必要がなくなりコードの可読性を上げることができる。
+またGROUP BY句でソートを行う必要がなくなり、処理速度が向上することが見込まれる。

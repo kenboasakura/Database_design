@@ -1,0 +1,56 @@
+ALTER TABLE
+	branch_products
+ADD
+	(
+	branch_office_name CHAR(5) NOT NULL,
+	branch_name CHAR(5) NOT NULL,
+	product_name CHAR(7) NOT NULL
+	)
+;
+
+UPDATE
+	branch_products
+SET
+	branch_office_name =
+		CASE
+			WHEN branch_office_id = '001' THEN '東京'
+			WHEN branch_office_id = '002' THEN '大阪'
+			ELSE '東京'
+		END,
+	branch_name =
+		CASE 
+			WHEN branch_office_id = '001'
+			AND branch_id = '01' THEN '渋谷'
+			WHEN branch_office_id = '001'
+			AND branch_id = '02' THEN '八重洲'
+			WHEN branch_office_id = '002'
+			AND branch_id = '01' THEN '堺'
+			WHEN branch_office_id = '002'
+			AND branch_id = '02' THEN '豊中'
+			ELSE '渋谷'
+		END,
+	product_name =
+		CASE
+			WHEN product_id = '001' THEN '石鹸'
+			WHEN product_id = '002' THEN 'タオル'
+			WHEN product_id = '003' THEN 'ハブラシ'
+			WHEN product_id = '004' THEN 'コップ'
+			WHEN product_id = '005' THEN '箸'
+			WHEN product_id = '006' THEN 'スプーン'
+			WHEN product_id = '007' THEN '雑誌'
+			WHEN product_id = '008' THEN '爪切り'
+			ELSE '未分類'
+		END
+;
+
+SELECT
+	branch_office_name AS 支社名,
+	branch_name AS 支店名,
+	product_name AS 商品名
+FROM
+	branch_products
+;
+
+この変更によって、支社、支店ごとの支社名、支店名とその支店で扱っている商品が簡単に検索することができる。
+また、この問題と同じ検索を行う場合改修前は結合を3つも使用していたため処理速度が遅くなっていたが、
+結合を使う必要がなくなったため大幅な処理速度の向上が見込める。

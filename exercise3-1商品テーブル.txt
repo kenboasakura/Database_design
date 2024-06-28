@@ -1,0 +1,40 @@
+CREATE TABLE
+	products
+	(
+		product_id CHAR(10) PRIMARY KEY,
+		product_name CHAR(10) NOT NULL,
+		product_category_id CHAR(10) NULL
+	)
+;
+
+INSERT INTO
+	products
+	(
+		product_id,
+		product_name,
+		product_category_id
+	)
+	
+VALUES
+	('001','石鹸','C1'),
+	('002','タオル','C1'),
+	('003','ハブラシ','C1'),
+	('004','コップ','C1'),
+	('005','箸','C2'),
+	('006','スプーン','C2'),
+	('007','雑誌','C3'),
+	('008','爪切り','C4')
+;
+
++------------+--------------+---------------------+
+| product_id | product_name | product_category_id |
++------------+--------------+---------------------+
+| 001        | 石鹸         | C1                  |
+| 002        | タオル       | C1                  |
+| 003        | ハブラシ     | C1                  |
+| 004        | コップ       | C1                  |
+| 005        | 箸           | C2                  |
+| 006        | スプーン     | C2                  |
+| 007        | 雑誌         | C3                  |
+| 008        | 爪切り       | C4                  |
++------------+--------------+---------------------+
